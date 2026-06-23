@@ -1,7 +1,7 @@
 import os
 from pyodbc import Connection, connect
 
-from errors import MissingEnvironmentVariableError
+from .errors import MissingEnvironmentVariableError
 
 def get_connection() -> Connection:
     DB_SERVER = os.getenv("DB_SERVER")
