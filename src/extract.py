@@ -27,3 +27,11 @@ def extract_customers(conn: Connection) -> None:
     df = pd.read_sql_query(sql_query, conn)
     df.to_parquet(ROOT / "data/raw/customers.parquet")
     print(f"Successfully Save customers as parquet, total registers: {len(df)}")
+
+def extract_factinternetsales(conn: Connection) -> None:
+    with open(ROOT / "src/sql/extract_factinternetsales.sql", "r") as file:
+        sql_query = file.read()
+    
+    df = pd.read_sql_query(sql_query, conn)
+    df.to_parquet(ROOT / "data/raw/internet_sales.parquet")
+    print(f"Successfully Save internet_sales as parquet, total registers: {len(df)}")
