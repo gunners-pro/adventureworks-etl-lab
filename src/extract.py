@@ -1,10 +1,10 @@
 from pathlib import Path
 import pandas as pd
-from pyodbc import Connection
+from sqlalchemy import Engine
 
 ROOT = Path(__file__).resolve().parent.parent
 
-def extract_products(conn: Connection) -> None:
+def extract_products(conn: Engine) -> None:
     with open(ROOT / "src/sql/extract_products.sql", "r") as file:
         sql_query = file.read()
 
@@ -12,7 +12,7 @@ def extract_products(conn: Connection) -> None:
     df.to_parquet(ROOT / "data/raw/products.parquet")
     print(f"Successfully Save products as parquet, total registers: {len(df)}")
 
-def extract_customers(conn: Connection) -> None:
+def extract_customers(conn: Engine) -> None:
     with open(ROOT / "src/sql/extract_customers.sql", "r") as file:
         sql_query = file.read()
 
@@ -20,7 +20,7 @@ def extract_customers(conn: Connection) -> None:
     df.to_parquet(ROOT / "data/raw/customers.parquet")
     print(f"Successfully Save customers as parquet, total registers: {len(df)}")
 
-def extract_factinternetsales(conn: Connection) -> None:
+def extract_factinternetsales(conn: Engine) -> None:
     with open(ROOT / "src/sql/extract_factinternetsales.sql", "r") as file:
         sql_query = file.read()
     
